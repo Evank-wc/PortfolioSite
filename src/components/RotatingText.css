@@ -1,0 +1,49 @@
+.text-rotate {
+  display: inline-flex;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.text-rotate-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.text-rotate-word {
+  display: inline-block;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  transition: background 0.3s ease;
+  white-space: nowrap;
+}
+
+.text-rotate-word:hover {
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+}
+
+.text-rotate-lines {
+  display: inline-flex;
+  position: relative;
+  white-space: nowrap;
+}
+
+.text-rotate-element {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+}
+
+.text-rotate-space {
+  display: inline-block;
+  width: 0.5rem;
+} 

@@ -153,13 +153,51 @@ function SplashCursor({
       return status === gl.FRAMEBUFFER_COMPLETE;
     }
 
+    class Program {
+      uniforms: any;
+      program: WebGLProgram;
+      gl: WebGLRenderingContext;
+
+      constructor(vertexShader: string, fragmentShader: string, gl: WebGLRenderingContext) {
+        this.gl = gl;
+        this.uniforms = {};
+        this.program = gl.createProgram()!;
+
+        gl.attachShader(this.program, vertexShader);
+        gl.attachShader(this.program, fragmentShader);
+        gl.linkProgram(this.program);
+
+        if (!gl.getProgramParameter(this.program, gl.LINK_STATUS))
+          throw gl.getProgramInfoLog(this.program);
+
+        const uniformCount = gl.getProgramParameter(this.program, gl.ACTIVE_UNIFORMS);
+
+        for (let i = 0; i < uniformCount; i++) {
+          const uniformName = gl.getActiveUniform(this.program, i)?.name;
+          if (uniformName) {
+            this.uniforms[uniformName] = gl.getUniformLocation(this.program, uniformName);
+          }
+        }
+      }
+
+      bind() {
+        this.gl.useProgram(this.program);
+      }
+    }
+
     class Material {
-      constructor(vertexShader, fragmentShaderSource) {
+      vertexShader: string;
+      fragmentShaderSource: string;
+      programs: Program[];
+      activeProgram: Program | null;
+      uniforms: any;
+
+      constructor(vertexShader: string, fragmentShaderSource: string) {
         this.vertexShader = vertexShader;
         this.fragmentShaderSource = fragmentShaderSource;
         this.programs = [];
         this.activeProgram = null;
-        this.uniforms = [];
+        this.uniforms = {};
       }
       setKeywords(keywords) {
         let hash = 0;
@@ -180,17 +218,6 @@ function SplashCursor({
       }
       bind() {
         gl.useProgram(this.activeProgram);
-      }
-    }
-
-    class Program {
-      constructor(vertexShader, fragmentShader) {
-        this.uniforms = {};
-        this.program = createProgram(vertexShader, fragmentShader);
-        this.uniforms = getUniforms(this.program);
-      }
-      bind() {
-        gl.useProgram(this.program);
       }
     }
 
@@ -561,91 +588,43 @@ function SplashCursor({
 
     let dye, velocity, divergence, curl, pressure;
 
-    const copyProgram = new Program(baseVertexShader, copyShader);
-    const clearProgram = new Program(baseVertexShader, clearShader);
-    const splatProgram = new Program(baseVertexShader, splatShader);
-    const advectionProgram = new Program(baseVertexShader, advectionShader);
-    const divergenceProgram = new Program(baseVertexShader, divergenceShader);
-    const curlProgram = new Program(baseVertexShader, curlShader);
-    const vorticityProgram = new Program(baseVertexShader, vorticityShader);
-    const pressureProgram = new Program(baseVertexShader, pressureShader);
-    const gradienSubtractProgram = new Program(baseVertexShader, gradientSubtractShader);
+    const copyProgram = new Program(baseVertexShader, copyShader, gl);
+    const clearProgram = new Program(baseVertexShader, clearShader, gl);
+    const splatProgram = new Program(baseVertexShader, splatShader, gl);
+    const advectionProgram = new Program(baseVertexShader, advectionShader, gl);
+    const divergenceProgram = new Program(baseVertexShader, divergenceShader, gl);
+    const curlProgram = new Program(baseVertexShader, curlShader, gl);
+    const vorticityProgram = new Program(baseVertexShader, vorticityShader, gl);
+    const pressureProgram = new Program(baseVertexShader, pressureShader, gl);
+    const gradientSubtractProgram = new Program(baseVertexShader, gradientSubtractShader, gl);
     const displayMaterial = new Material(baseVertexShader, displayShaderSource);
 
     function initFramebuffers() {
-      let simRes = getResolution(config.SIM_RESOLUTION);
-      let dyeRes = getResolution(config.DYE_RESOLUTION);
+      const simRes = getResolution(config.SIM_RESOLUTION);
+      const dyeRes = getResolution(config.DYE_RESOLUTION);
+
       const texType = ext.halfFloatTexType;
       const rgba = ext.formatRGBA;
       const rg = ext.formatRG;
       const r = ext.formatR;
       const filtering = ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
-      gl.disable(gl.BLEND);
 
-      if (!dye)
-        dye = createDoubleFBO(
-          dyeRes.width,
-          dyeRes.height,
-          rgba.internalFormat,
-          rgba.format,
-          texType,
-          filtering
-        );
+      if (dye == null)
+        dye = createDoubleFBO(dyeRes.width, dyeRes.height, rgba.internalFormat, rgba.format, texType, filtering);
       else
-        dye = resizeDoubleFBO(
-          dye,
-          dyeRes.width,
-          dyeRes.height,
-          rgba.internalFormat,
-          rgba.format,
-          texType,
-          filtering
-        );
+        dye = resizeDoubleFBO(dye, dyeRes.width, dyeRes.height, rgba.internalFormat, rgba.format, texType, filtering);
 
-      if (!velocity)
-        velocity = createDoubleFBO(
-          simRes.width,
-          simRes.height,
-          rg.internalFormat,
-          rg.format,
-          texType,
-          filtering
-        );
+      if (velocity == null)
+        velocity = createDoubleFBO(simRes.width, simRes.height, rg.internalFormat, rg.format, texType, filtering);
       else
-        velocity = resizeDoubleFBO(
-          velocity,
-          simRes.width,
-          simRes.height,
-          rg.internalFormat,
-          rg.format,
-          texType,
-          filtering
-        );
+        velocity = resizeDoubleFBO(velocity, simRes.width, simRes.height, rg.internalFormat, rg.format, texType, filtering);
 
-      divergence = createFBO(
-        simRes.width,
-        simRes.height,
-        r.internalFormat,
-        r.format,
-        texType,
-        gl.NEAREST
-      );
-      curl = createFBO(
-        simRes.width,
-        simRes.height,
-        r.internalFormat,
-        r.format,
-        texType,
-        gl.NEAREST
-      );
-      pressure = createDoubleFBO(
-        simRes.width,
-        simRes.height,
-        r.internalFormat,
-        r.format,
-        texType,
-        gl.NEAREST
-      );
+      divergence = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+      curl = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+      pressure = createDoubleFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+
+      initBloomFramebuffers();
+      initSunraysFramebuffers();
     }
 
     function createFBO(w, h, internalFormat, format, type, param) {

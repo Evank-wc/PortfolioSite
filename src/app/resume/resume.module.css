@@ -1,0 +1,269 @@
+.main {
+  position: relative;
+  min-height: 100vh;
+  background: black;
+  overflow: hidden;
+}
+
+.liquidBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.buttonContainer {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.resumeContent {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 1rem;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.heading {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: white;
+}
+
+.contactInfo {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.linkHover {
+  opacity: 1;
+}
+
+.separator {
+  opacity: 0.5;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.subHeading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.paragraph {
+  line-height: 1.6;
+  opacity: 0.8;
+  color: white;
+  text-align: justify;
+}
+
+.experience {
+  margin-bottom: 2rem;
+}
+
+.experienceTitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: white;
+}
+
+.experiencePeriod {
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.experienceList {
+  list-style: none;
+  padding-left: 1rem;
+  opacity: 0.8;
+  color: white;
+}
+
+.experienceList li {
+  margin-bottom: 0.5rem;
+}
+
+.education {
+  margin-bottom: 2rem;
+}
+
+.educationTitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: white;
+}
+
+.educationPeriod {
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.educationDetails {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+  color: white;
+}
+
+.languageProficiency {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.language {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 300px;
+  color: white;
+}
+
+.star {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  opacity: 1;
+}
+
+.filledStar {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  opacity: 1;
+}
+
+.emptyStar {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.3;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skillTag {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.metaBalls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+@media print {
+  .main {
+    background: white !important;
+  }
+
+  .resumeContent {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 2rem !important;
+  }
+
+  .heading,
+  .subHeading,
+  .paragraph,
+  .experienceList li,
+  .experienceTitle,
+  .experiencePeriod,
+  .educationTitle,
+  .educationPeriod,
+  .educationDetails,
+  .language,
+  .skillTag {
+    color: black !important;
+    opacity: 1 !important;
+  }
+
+  .link {
+    color: #0066cc !important;
+    text-decoration: underline !important;
+  }
+
+  .skillTag {
+    background: #f0f0f0 !important;
+    color: black !important;
+    border: 1px solid #ddd !important;
+  }
+
+  .star,
+  .filledStar {
+    background: black !important;
+    border: 1px solid black !important;
+  }
+
+  .buttonContainer,
+  .liquidBackground,
+  .metaBalls {
+    display: none !important;
+  }
+} 

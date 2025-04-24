@@ -5,18 +5,19 @@ import { motion } from 'framer-motion'
 
 const styles = {
   wrapper: {
+    position: 'relative' as const,
     display: 'inline-block',
-    whiteSpace: 'pre-wrap',
+    overflow: 'hidden'
   },
   srOnly: {
-    position: 'absolute',
+    position: 'absolute' as const,
     width: '1px',
     height: '1px',
     padding: 0,
     margin: '-1px',
     overflow: 'hidden',
-    clip: 'rect(0,0,0,0)',
-    border: 0,
+    clip: 'rect(0, 0, 0, 0)',
+    border: 0
   },
   encrypted: {
     color: 'rgba(255, 255, 255, 0.3)',

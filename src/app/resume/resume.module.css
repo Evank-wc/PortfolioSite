@@ -1,158 +1,175 @@
 .main {
-  position: relative;
   min-height: 100vh;
-  background: black;
+  width: 100%;
+  position: relative;
   overflow: hidden;
+  background: #000;
+  color: #fff;
+  padding: 2rem;
 }
 
 .liquidBackground {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.metaBalls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0.1;
 }
 
 .content {
   position: relative;
-  z-index: 1;
-  width: 100%;
+  z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
 }
 
 .buttonContainer {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
   display: flex;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .button {
-  padding: 0.5rem 1rem;
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
-  color: white;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .resumeContent {
-  max-width: 800px;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 1rem;
-  padding: 3rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .heading {
   font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  color: white;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
 }
 
 .contactInfo {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
-  margin-bottom: 3rem;
+  flex-wrap: wrap;
 }
 
 .link {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-.linkHover {
-  opacity: 1;
+.link:hover {
+  color: #00ff88;
 }
 
 .separator {
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .section {
-  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .subHeading {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  margin: 0;
+  color: #00ff88;
 }
 
 .paragraph {
   line-height: 1.6;
-  opacity: 0.8;
-  color: white;
-  text-align: justify;
+  margin: 0;
 }
 
 .experience {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .experienceTitle {
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: white;
+  font-weight: 600;
+  margin: 0;
 }
 
 .experiencePeriod {
-  opacity: 0.8;
-  margin-bottom: 0.5rem;
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
 }
 
 .experienceList {
   list-style: none;
-  padding-left: 1rem;
-  opacity: 0.8;
-  color: white;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .experienceList li {
-  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .education {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .educationTitle {
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: white;
+  font-weight: 600;
+  margin: 0;
 }
 
 .educationPeriod {
-  opacity: 0.8;
-  margin-bottom: 0.5rem;
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
 }
 
 .educationDetails {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.8;
-  color: white;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .languageProficiency {
@@ -163,34 +180,24 @@
 
 .language {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 300px;
-  color: white;
+  gap: 1rem;
+}
+
+.language span {
+  min-width: 80px;
+}
+
+.language div {
+  display: flex;
+  gap: 0.25rem;
 }
 
 .star {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: white;
-  opacity: 1;
-}
-
-.filledStar {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: white;
-  opacity: 1;
-}
-
-.emptyStar {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: white;
-  opacity: 0.3;
+  width: 16px;
+  height: 16px;
+  background: #00ff88;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
 .skills {
@@ -201,69 +208,58 @@
 
 .skillTag {
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 2rem;
   font-size: 0.9rem;
-  color: white;
-}
-
-.metaBalls {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  color: #00ff88;
 }
 
 @media print {
   .main {
-    background: white !important;
+    background: #fff;
+    color: #000;
   }
 
-  .resumeContent {
-    background: white !important;
-    color: black !important;
-    box-shadow: none !important;
-    border: none !important;
-    padding: 2rem !important;
+  .liquidBackground,
+  .metaBalls {
+    display: none;
   }
 
-  .heading,
-  .subHeading,
-  .paragraph,
-  .experienceList li,
-  .experienceTitle,
-  .experiencePeriod,
-  .educationTitle,
-  .educationPeriod,
-  .educationDetails,
-  .language,
-  .skillTag {
-    color: black !important;
-    opacity: 1 !important;
+  .content {
+    background: #fff;
+    backdrop-filter: none;
+  }
+
+  .buttonContainer {
+    display: none;
   }
 
   .link {
-    color: #0066cc !important;
-    text-decoration: underline !important;
+    color: #000;
+  }
+
+  .separator {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .subHeading {
+    color: #000;
+  }
+
+  .experiencePeriod,
+  .educationPeriod,
+  .educationDetails {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .star {
+    background: #000;
   }
 
   .skillTag {
-    background: #f0f0f0 !important;
-    color: black !important;
-    border: 1px solid #ddd !important;
-  }
-
-  .star,
-  .filledStar {
-    background: black !important;
-    border: 1px solid black !important;
-  }
-
-  .buttonContainer,
-  .liquidBackground,
-  .metaBalls {
-    display: none !important;
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #000;
   }
 } 

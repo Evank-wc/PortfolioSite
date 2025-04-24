@@ -17,6 +17,21 @@ export default function Resume() {
         />
       </div>
 
+      <div className={styles.metaBalls}>
+        <MetaBalls
+          color="#ffffff"
+          cursorBallColor="#ffffff"
+          cursorBallSize={2}
+          ballCount={25}
+          animationSize={80}
+          enableMouseInteraction={true}
+          enableTransparency={true}
+          hoverSmoothness={0.05}
+          clumpFactor={1.2}
+          speed={0.3}
+        />
+      </div>
+
       <motion.div 
         className={styles.content}
         initial={{ opacity: 0, y: 20 }}
@@ -249,7 +264,7 @@ export default function Resume() {
                 <span>Malay</span>
                 <div>
                   {[...Array(5)].map((_, i) => (
-                    <div key={i} className={i < 2 ? styles.filledStar : styles.emptyStar} />
+                    <div key={i} className={styles.star} />
                   ))}
                 </div>
               </div>
@@ -261,63 +276,24 @@ export default function Resume() {
               Skills
             </h2>
             <div className={styles.skills}>
-              {[
-                'Node.js',
-                'HTML',
-                'React.js',
-                'TypeScript',
-                'Next.js',
-                'CSS',
-                'GitHub',
-                'ESLint',
-                'Swift',
-                'SwiftUI',
-                'Xcode',
-                'Front-End Development',
-                'Web Services',
-                'Artificial Intelligence (AI)',
-                'Python',
-                'Flask',
-                'Whisper',
-                'Groq',
-                'FFmpeg',
-                'Statistical Data Analysis',
-                'UI/UX',
-                'Software Project Management',
-                'Software Documentation',
-                'Data Management',
-                'Data Visualization',
-                'Generative AI Tools',
-                'Agile Methodologies',
-                'Bilingual Communications',
-                'Microsoft Office',
-                'Software Development',
-                'Interpersonal Communication',
-                'Team Management'
-              ].map((skill) => (
-                <span key={skill} className={styles.skillTag}>
-                  {skill}
-                </span>
-              ))}
+              <span className={styles.skillTag}>React.js</span>
+              <span className={styles.skillTag}>Next.js</span>
+              <span className={styles.skillTag}>TypeScript</span>
+              <span className={styles.skillTag}>HTML</span>
+              <span className={styles.skillTag}>CSS</span>
+              <span className={styles.skillTag}>Swift</span>
+              <span className={styles.skillTag}>SwiftUI</span>
+              <span className={styles.skillTag}>Node.js</span>
+              <span className={styles.skillTag}>Python</span>
+              <span className={styles.skillTag}>Flask</span>
+              <span className={styles.skillTag}>GitHub</span>
+              <span className={styles.skillTag}>ESLint</span>
+              <span className={styles.skillTag}>Xcode</span>
+              <span className={styles.skillTag}>FFmpeg</span>
             </div>
           </section>
         </motion.div>
       </motion.div>
-
-      <div className={styles.metaBalls}>
-        <MetaBalls
-          color="#ffffff"
-          cursorBallColor="#ffffff"
-          cursorBallSize={2}
-          ballCount={25}
-          animationSize={80}
-          enableMouseInteraction={true}
-          enableTransparency={true}
-          hoverSmoothness={0.05}
-          clumpFactor={1.2}
-          speed={0.3}
-        />
-      </div>
     </main>
   )
 } 

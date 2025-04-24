@@ -295,7 +295,8 @@ function SplashCursor({
         void main () {
             gl_FragColor = texture2D(uTexture, vUv);
         }
-      `
+      `,
+      []
     );
 
     const clearShader = compileShader(
@@ -310,7 +311,8 @@ function SplashCursor({
         void main () {
             gl_FragColor = value * texture2D(uTexture, vUv);
         }
-      `
+      `,
+      []
     );
 
     const displayShaderSource = `
@@ -373,7 +375,8 @@ function SplashCursor({
             vec3 base = texture2D(uTarget, vUv).xyz;
             gl_FragColor = vec4(base + splat, 1.0);
         }
-      `
+      `,
+      []
     );
 
     const advectionShader = compileShader(
@@ -444,7 +447,8 @@ function SplashCursor({
             float div = 0.5 * (R - L + T - B);
             gl_FragColor = vec4(div, 0.0, 0.0, 1.0);
         }
-      `
+      `,
+      []
     );
 
     const curlShader = compileShader(
@@ -467,7 +471,8 @@ function SplashCursor({
             float vorticity = R - L - T + B;
             gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);
         }
-      `
+      `,
+      []
     );
 
     const vorticityShader = compileShader(
@@ -502,7 +507,8 @@ function SplashCursor({
             velocity = min(max(velocity, -1000.0), 1000.0);
             gl_FragColor = vec4(velocity, 0.0, 1.0);
         }
-      `
+      `,
+      []
     );
 
     const pressureShader = compileShader(
@@ -528,7 +534,8 @@ function SplashCursor({
             float pressure = (L + R + B + T - divergence) * 0.25;
             gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);
         }
-      `
+      `,
+      []
     );
 
     const gradientSubtractShader = compileShader(
@@ -553,7 +560,8 @@ function SplashCursor({
             velocity.xy -= vec2(R - L, T - B);
             gl_FragColor = vec4(velocity, 0.0, 1.0);
         }
-      `
+      `,
+      []
     );
 
     const blit = (() => {
@@ -624,8 +632,8 @@ function SplashCursor({
       curl = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
       pressure = createDoubleFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
 
-      initBloomFramebuffers();
-      initSunraysFramebuffers();
+      // initBloomFramebuffers();
+      // initSunraysFramebuffers();
     }
 
     function createFBO(w, h, internalFormat, format, type, param) {
@@ -839,18 +847,18 @@ function SplashCursor({
       }
 
       // Gradient Subtract
-      gradienSubtractProgram.bind();
+      gradientSubtractProgram.bind();
       gl.uniform2f(
-        gradienSubtractProgram.uniforms.texelSize,
+        gradientSubtractProgram.uniforms.texelSize,
         velocity.texelSizeX,
         velocity.texelSizeY
       );
       gl.uniform1i(
-        gradienSubtractProgram.uniforms.uPressure,
+        gradientSubtractProgram.uniforms.uPressure,
         pressure.read.attach(0)
       );
       gl.uniform1i(
-        gradienSubtractProgram.uniforms.uVelocity,
+        gradientSubtractProgram.uniforms.uVelocity,
         velocity.read.attach(1)
       );
       blit(velocity.write);

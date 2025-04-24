@@ -267,7 +267,7 @@ export default function Home() {
                 </a>
 
                 <a 
-                  href="/resume" 
+                  href="/PortfolioSite/resume" 
                   style={{
                     display: 'flex',
                     alignItems: 'center',

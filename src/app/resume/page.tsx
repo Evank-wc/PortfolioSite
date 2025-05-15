@@ -433,8 +433,6 @@ export default function Resume() {
                 <span>GPA: 3.0/4.0</span>
                 <span>•</span>
                 <span>WAM: 74.62</span>
-                <span>•</span>
-                <span>Avg Grade: 84.37</span>
               </div>
             </div>
 
